@@ -1,0 +1,449 @@
+/* Se importa la fuente de Google Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Con el selector root definimos variables globales como los colores personalizados y estilos para todo el documento */
+
+:root {
+    --clr-main: #4b33a8;
+    --clr-main-light: #5539c7;
+    --clr-white: #ececec;
+    --clr-gray: #e2e2e2;
+    --clr-red: #961818;
+    --clr-green: #1f6e3e;
+}
+
+/* Se define el margin,padding, el tipo de fuente y el box sizing de todos los elementos de las paginas */
+
+* {
+    margin: 0; /* espacio exterior seteado a 0 para corregir espacio exterior predeterminado */
+    padding: 0; /* espacio interior seteado a 0 para corregir espacio interior predeterminado */
+    box-sizing: border-box; /* son las dimensiones incluyendo el padding y border */
+    font-family: 'Rubik', sans-serif; /* tipo de fuente */
+}
+
+/* Se definen los encabezados y demas elementos del texto */
+
+h1,h2,h3,h4,h5,h6,p,a,input,textarea,ul {
+    margin: 0;  /* espacio exterior nulo para corregir espacio predeterminado */
+    padding: 0; /* espacio interior nulo para corregir espacio predeterminado */
+}
+
+/* Se le quitan los puntos a la lista de elementos */
+
+ul {
+    list-style-type: none;
+}
+
+/* Se le quita el subrayado a los enlaces */
+
+a {
+    text-decoration: none;
+}
+
+/* Clase del contenedor principal */
+
+.wrapper {
+    display: grid; /* distribucion del contenedor tipo grid o rejilla */
+    grid-template-columns: 1fr 4fr; /* 2 columnas donde la 1era tiene el ancho de 1fr y la 2da el ancho de 4fr */
+    background-color: var(--clr-main); /* color de fondo principal */
+}
+
+/* Contenedor del aside */
+
+aside {             
+    padding: 2rem;  
+    padding-right: 0;               /* estara pegado en la parte derecha al contenedor main */
+    color: var(--clr-white);
+    position: sticky;               /* posicion inicial relative hasta que top:0 y se vuelve position fixed */
+    top: 0;                         /* El elemento no tendra espacio libre en la parte superior pues tiene el valor 0 */
+    height: 100vh;                  /* Alto del aside sera el 100% el alto de la ventana */
+    display: flex;                  /* Distribucion del contenedor tipo flex */
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Clase del header h1 del aside */
+
+.logo {
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+/* Clase de la lista unordered de los botones de las categorias o menu del aside */
+
+.menu {
+    display: flex;
+    flex-direction: column; 
+    gap: .5rem; /* espacio entre filas */
+}
+
+/* Clase de los botones del menu */
+
+/* Clase inicial o base de los botones */
+
+.boton-menu {
+    background-color: transparent; /* Color de fondo transparente */
+    border: 0; /* Se elimina el borde o contorno predeterminado de los botones */
+    padding: 1rem; 
+    color: var(--clr-white);
+    font-size: .85rem;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+/* Clase cuando los botones estan activos (se activan al hacer clic en ellos) */
+
+.boton-menu:hover {
+    background-color: var(--clr-white); /* Color de fondo blanco */
+    color: var(--clr-main);
+    width: 100%;
+    border-top-left-radius: 1rem;       /* Redondeo de las esquinas superior e inferior izquierdo */
+    border-bottom-left-radius: 1rem;    
+    position: relative; /* Posicion relativa a la posicion original del contenedor padre */
+}
+
+/* Redondeos especiales en el lado derecho */
+
+.boton-menu:hover::before {                /* Redondeo superior exterior */
+    content:'';
+    position: absolute;
+    width: 1rem;
+    height: 2rem;
+    bottom: 100%;                           /* Parte inferior del pseudo elemento se posiciona fuera del contenedor del boton-menu active a una altura igual al 100% la altura del contenedor */
+    right: 0;                               /* Pegado al lado derecho */
+    background-color: transparent;
+    border-bottom-right-radius: .5rem;
+    box-shadow: 0 1rem 0 var(--clr-white);
+}
+
+.boton-menu:hover::after {                 /* Redondeo inferior exterior */
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 2rem;
+    top: 100%;                              /* Parte superior del pseudo elemento se posiciona fuera del contenedor del boton-menu active a una altura igual al 100% la altura del contenedor */
+    right: 0;                               /* Pegado al lado derecho */
+    background-color: transparent;
+    border-top-right-radius: .5rem;
+    box-shadow: 0 -1rem 0 var(--clr-white);
+}
+
+.boton-carrito {
+    margin-top: 2rem;                        /* Separacion superior externa de boton carrito de compras */
+}
+
+/* Rotacion de los iconos de los botones de las categorias */
+
+.boton-menu > i.bi-hand-index-thumb-fill,
+.boton-menu > i.bi-hand-index-thumb {
+    transform: rotateZ(90deg);
+}
+
+/* Estilos del footer del aside */
+
+.texto-footer {
+    color: var(--clr-white);
+    font-size: .85 rem;
+}
+
+main {
+    padding: 3rem;                          /* espacio interior del contenedor main */
+    margin: 1rem;                           /* espacio exterior del contenedor main */
+    margin-left: 0;                         /* contendor pegado en el lado izquierdo con el contenedor aside */
+    background-color: var(--clr-white);
+    border-radius: 2rem;
+    
+}
+/* Clase del titulo principal del main */
+.titulo-principal {
+    color: var(--clr-main);
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+/* Contenedor productos */
+.contenedor-productos {
+    display: grid;                        /* estilo del contenedor tipo grid */
+    grid-template-columns: repeat(4,1fr); /* se repiten 4 veces las columnas de 1fr */
+    gap: 1rem;                            /* espacio entre columnas */
+}
+/* Contenedor producto detalles */
+.producto-detalles {
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+    padding: .5rem;
+    border-radius: 1rem;                /* radio de redondeo de bordes */
+    margin-top: -2rem;                  /* para que este superpuesta a la imagen o foto */
+    position: relative;             /* posicion relativa sin afectar a los demas elementos */
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;                /* espacio entre titulo,precio y boton agregar */
+}
+
+.producto-imagen {
+    max-width: 100%;        /* el ancho maximo no podra exceder del ancho del contenedor padre */
+    border-radius: 1rem; 
+}
+
+.producto-titulo {
+    font-size: 1rem;
+}
+
+.producto-agregar {
+    border: 0;                           /* Elimina el borde predeterminado del boton (sera transparente) */
+    background-color: var(--clr-white);
+    padding: .4rem;
+    border-radius: 2rem;
+    color: var(--clr-main);
+    text-transform: uppercase;           /* Convertir a Mayuscula */
+    cursor: pointer;
+    border: 2px solid var(--clr-white);  /* Nuevo valor del borde del boton (no es necesario eliminar o ponder el borde a 0 cuando tienes un borde ya definido como este,solo se coloco asi para fines educativos) */
+    transition: background-color .2s, color .2s; /* Transicion del cambio de color de fondo cuando se aproxima el puntero al boton */
+}
+
+.producto-agregar:hover {
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+}
+
+/** CARRITO **/
+
+.carrito-vacio,.carrito-comprado {
+    color: var(--clr-main);  /* Color de letra de etiquetas de carrito vacio y carrito comprado */
+}
+
+.contenedor-carrito {       /* Contenedor principal que alberga los productos del carrito, las acciones, el carrito vacio y el carrito comprado */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.carrito-productos {        /* Contenedor de los productos del carrito */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.carrito-producto {         /* Contenedor de cada producto del carrito */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    border-radius: 1rem;
+    background-color: var(--clr-gray);
+    color: var(--clr-main);
+    padding: .5rem;
+    padding-right: 1.5rem;
+}
+
+.carrito-producto-imagen {   /* Contenedor de la imagen del producto del carrito */
+    width: 4rem;
+    border-radius: 1rem;
+}
+
+.carrito-producto small {     /* Texto de las secciones del producto */
+    font-size: .75rem;   
+}
+
+.carrito-producto-eliminar {  /* Boton eliminar del carrito producto */
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--clr-red);
+    transition: transform 0.2s;
+}
+
+.carrito-producto-eliminar:hover {
+    transform: scale(1.3);          /* Cambio de escala del boton en 1.3 */
+}
+
+.carrito-acciones {           /* COntenedor de las acciones */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: transparent;
+}
+
+.carrito-acciones-vaciar { /* Boton vaciar carrito */
+    border: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--clr-main);
+    background-color: var(--clr-gray);
+    border-radius: 1rem;
+    padding: 1rem;
+    transition: background-color .2s, color .2s; /* Transicion del cambio de color de fondo  y del color del texto cuando se aproxima el puntero al boton */
+}
+
+.carrito-acciones-vaciar:hover {
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+}
+
+.carrito-acciones-derecha {  /* Contenedor del total y comprar carrito */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.carrito-acciones-total { /* Seccion total */
+    display: flex;                          
+    color: var(--clr-main);                   
+    background-color: var(--clr-gray);      
+    border-top-left-radius: 1rem;       /* Solo tiene redondeos en la parte izquierda superior e inferior */
+    border-bottom-left-radius: 1rem;        
+    padding: 1rem;                      
+    gap: 1rem;                           
+}
+
+.carrito-acciones-comprar {             /* Seccion comprar */
+    border: 0;
+    text-transform: uppercase;    
+    cursor:pointer;
+    color: var(--clr-white);
+    background-color: var(--clr-main);
+    border-top-right-radius: 1rem;      /* Solo tiene redondeos en la parte derecha superior e inferior */
+    border-bottom-right-radius: 1rem;
+    padding: 1rem;
+    transition: background-color .2s; 
+}
+
+.carrito-acciones-comprar:hover {
+    background-color: var(--clr-green); /* cambio de color de fondo del boton comprar*/
+}
+
+.header-mobile {
+    display: none;      /* Se oculta el header de la version movil para la version web */
+}
+
+.disabled {             /* Clase disabled utilizado para ocultar carrito vacio, carrito productos, carrito acciones, carrito comprado */
+    display: none;
+}
+
+.numerito {                             /* Numero de items que aparece al costado derecho del boton carrito del aside */
+    background-color: var(--clr-white);
+    color: var(--clr-main);
+    padding: .15rem .25rem;
+    border-radius: .25rem;
+}
+
+.boton-carrito.active .numerito {        /* Se activa este estilo si la clase .boton-carrito esta activo */
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+}
+
+.close-menu{
+    display: none; /* se oculta el boton de cerrar menu de botones de categoria*/
+}
+
+
+/* MEDIA QUERIES para hacer un modelo responsive para distinto tamaño de pantallas*/
+
+@media screen and (max-width: 850px) { /* Para un ancho de pantalla de 850px */
+    .contenedor-productos {
+        grid-template-columns: 1fr 1fr 1fr; /* se van a ver 3 columnas en ves de 4 columnas */
+        gap: 1rem; 
+    }
+}
+
+@media screen and (max-width: 675px) { /* Para un ancho de pantalla de 675px */
+    .contenedor-productos {
+        grid-template-columns: 1fr 1fr; /* se van a ver 2 columnas en ves de 4 columnas*/
+    }
+}
+
+@media screen and (max-width: 600px) { /* Para un ancho de pantalla de 600px */
+    .wrapper {              /*el contenedor padre adopta distribucion flex del tipo columna*/
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;          /* altura minima de 100% de la ventana */
+    }
+    aside {                 /* aside en la pantalla para movil*/
+        position: fixed;    /* fijo*/
+        background-color: var(--clr-main); 
+        left: 0; /*pegado a la izquierda*/
+        z-index: 9;  /* por encima de la pantalla de los productos y del carrito*/
+        box-shadow: 0 0 0 100vmax rgba(0 0 0 .75); /*sombra opaca exterior al aside para ocultar la pantalla de los productos*/
+        transform: translateX(-100%); /*inicialmente esta trasladado todo hacia la izquierda*/
+        opacity: 0; /*opacidad inicial de 0*/
+        visibility: hidden; /*visibilidad oculta*/
+        transition: .2s; 
+    }
+
+    .aside-visible{
+        transform: translateX(0); /* se traslada hacia la derecha */
+        opacity: 1; /* visible*/
+        visibility: visible;
+    }
+
+    .boton-menu.active::before,
+    .boton-menu.active::after {
+        display: none; /*se oculta los bordes exteriores al sombrear los botones de las categorias*/
+    }
+
+    .header-mobile {    /* contenedor para mostrar titulo y boton de despliegue del menu de categorias*/
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .open-menu,
+    .close-menu {       /* boton para abrir y cerrar el menu de botones de categorias*/
+        border: 0;      /* sin bordes */                    
+        background-color: transparent; /* fondo transparente */
+        color: var(--clr-gray);
+        font-size: 2rem;
+        cursor: pointer; 
+    }
+
+    .close-menu {           
+        display: block;
+        position: absolute;  /* posicion del boton de cierre del menu*/
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .carrito-producto{      /* ajuste del contenedor de cada producto del carrito*/
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-right: .5rem;
+    }
+
+    .carrito-acciones { /* ajuste del contenedor de acciones en el carrito */
+        flex-wrap: wrap;
+        row-gap: 1rem;
+    }
+
+    .carrito-producto-subtotal{ /* se oculta el subtotal en la version movil*/
+        display: none;
+    }
+
+    main {              /*se ajusta el contenedor del main para la version movil */
+        margin: 1rem;
+        margin-top: 0;
+        padding: 2rem;
+    }
+
+    .contenedor-productos {
+        grid-template-columns: 1fr 1fr; /* se van a ver 2 columnas en ves de 4 columnas*/
+        gap: 1rem; 
+    }
+
+    .header-mobile .logo {
+        color: var(--clr-gray);     /*color del titulo de la tienda en la version movil*/
+    }
+
+}
+
+@media screen and (max-width: 400px) { /* Para un ancho de pantalla de 400px */
+    .contenedor-productos {
+        grid-template-columns: 1fr; /* se va a ver 1 sola columna de productos*/
+    }
+}
